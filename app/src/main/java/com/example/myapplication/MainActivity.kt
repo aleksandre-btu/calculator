@@ -9,6 +9,7 @@ import android.widget.TextView
 class MainActivity : AppCompatActivity() {
 
     private lateinit var resultTextView: TextView
+    private lateinit var delButton: Button
     private var operand: Double = 0.0
     private var operation: String = ""
 
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         this.resultTextView = findViewById(R.id.resultTextView)
+        this.delButton = findViewById(R.id.DEL)
     }
 
     fun numberClick(clickedView: View) {
@@ -54,10 +56,44 @@ class MainActivity : AppCompatActivity() {
         }
 
         when (this.operation) {
-            "+" -> this.resultTextView.text = (this.operand + secOperand).toString()
-            "-" -> this.resultTextView.text = (this.operand - secOperand).toString()
-            "*" -> this.resultTextView.text = (this.operand * secOperand).toString()
-            "/" -> this.resultTextView.text = (this.operand / secOperand).toString()
+            "+" -> {
+
+                if((this.operand + secOperand).compareTo((this.operand + secOperand).toInt()) == 0) {
+                    this.resultTextView.text = (this.operand + secOperand).toInt().toString()
+                } else {
+                    this.resultTextView.text = (this.operand + secOperand).toString()
+                }
+            }
+            "-" -> {
+                if((this.operand - secOperand).compareTo((this.operand - secOperand).toInt()) == 0) {
+                    this.resultTextView.text = (this.operand - secOperand).toInt().toString()
+                } else {
+                    this.resultTextView.text = (this.operand - secOperand).toString()
+                }
+            }
+            "*" -> {
+                if((this.operand * secOperand).compareTo((this.operand * secOperand).toInt()) == 0) {
+                    this.resultTextView.text = (this.operand * secOperand).toInt().toString()
+                } else {
+                    this.resultTextView.text = (this.operand * secOperand).toString()
+                }
+            }
+            "/" -> {
+                if((this.operand / secOperand).compareTo((this.operand / secOperand).toInt()) == 0) {
+                    this.resultTextView.text = (this.operand / secOperand).toInt().toString()
+                } else {
+                    this.resultTextView.text = (this.operand / secOperand).toString()
+                }
+            }
         }
     }
+
+    fun clearClick(view: View) {
+        this.resultTextView.text = ""
+    }
+
+    fun delClick(view: View) {
+        this.resultTextView.text = this.resultTextView.text.dropLast(1)
+    }
+
 }
